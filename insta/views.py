@@ -21,3 +21,16 @@ def index(request):
 
 
     return render(request, 'istagram/index.html', locals())
+
+def add_image(request):
+        current_user = request.user
+        if request.method == 'POST':
+                form = ImageForm(request.POST, request.FILES)
+                if form.is_valid():
+                        add=form.save(commit=False)
+                        add.user = current_user
+                        add.save()
+                return redirect('index')
+        else:
+                form = ImageForm()
+                return render(request,'istagram/image.html', {"form":form})    
