@@ -31,3 +31,12 @@ class Profile(models.Model):
     @classmethod
     def search_user(cls,user):
         return cls.objects.filter(user__username__icontains=user).all()
+
+
+class Image(VoteModel,models.Model):
+    name = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='images/', default='text.png')
+    caption = models.CharField(max_length=200)
+    date_uploaded = models.DateTimeField(auto_now_add=True)
+    profile = models.ForeignKey(User, on_delete=models.CASCADE)
+    like_add = models.PositiveIntegerField(default=0)
