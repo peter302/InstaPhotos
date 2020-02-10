@@ -33,4 +33,15 @@ def add_image(request):
                 return redirect('index')
         else:
                 form = ImageForm()
-                return render(request,'istagram/image.html', {"form":form})    
+                return render(request,'istagram/image.html', {"form":form})
+
+@login_required(login_url='/accounts/login/')
+def profile_info(request):
+        current_user = request.user
+        # follow = len(Follow.objects.followers(users))
+        # following = len(Follow.objects.following(users))
+        # people_following = Follow.objects.following(request.user)
+        profile = Profile.objects.filter(user=current_user).first()
+        posts = request.user.image_set.all()
+
+        return render(request, 'istagram/profile.html', {"images": posts, "profile": profile})                    
