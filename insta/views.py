@@ -91,7 +91,7 @@ def search_results(request):
         searched_users = User.objects.filter(username__icontains = search_term)
         message = f"{search_term}"
         profile_pic = User.objects.all()
-        return render(request, 'istagram/search.html', {'message':message, 'results':searched_users, 'profile_pic':profile_pic})
+        return render(request, 'instagram/search.html', {'message':message, 'results':searched_users, 'profile_pic':profile_pic})
     else:
         message = "You haven't searched for any term"
         return render(request, 'instagram/search.html', {'message':message})
