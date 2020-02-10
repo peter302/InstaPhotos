@@ -108,4 +108,19 @@ def unfollow(request, user_id):
     other_user = User.objects.get(id = user_id)
     follow = Follow.objects.remove_follower(request.user, other_user)
 
-    return redirect('index')                                                        
+    return redirect('index')
+
+
+
+@login_required(login_url='/accounts/register/')
+def like_images(request, id):
+        image = Image.get_one_image(id)
+        user = request.user
+        user_id = user.id
+
+        if user.is_authenticated:
+                uplike = image.votes.up(user_id)
+                image.like_add = image.votes.count()
+                image.save()
+
+        return redirect('index')                                                         
