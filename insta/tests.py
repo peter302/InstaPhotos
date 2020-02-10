@@ -53,7 +53,7 @@ class ImageTest(TestCase):
 class CommentsTest(TestCase):
 
     def setUp(self):
-        self.new_user = User(username='Titus', email='titusouko@gmail.com', password='1234')
+        self.new_user = User(username='Peter', email='petermbaik@gmail.com', password='1234')
         self.new_user.save()
         self.new_image = Image(name='Moringa', image='moringa.jpg', caption='wonderful place to be', profile=self.new_user, like_add=0)
         self.new_image.save()
@@ -71,4 +71,4 @@ class CommentsTest(TestCase):
         self.new_comment.save_comment()
         self.new_comment.delete_comment()
         comment = Comments.objects.all()
-        self.assertTrue(len(comment)==0)        
+        self.assertTrue(len(comment)==0)
