@@ -20,7 +20,7 @@ def index(request):
     profile = Profile.get_all_profiles()
 
 
-    return render(request, 'istagram/index.html', locals())
+    return render(request, 'instagram/index.html', locals())
 
 def add_image(request):
         current_user = request.user
@@ -33,7 +33,7 @@ def add_image(request):
                 return redirect('index')
         else:
                 form = ImageForm()
-                return render(request,'istagram/image.html', {"form":form})
+                return render(request,'instagram/image.html', {"form":form})
 
 @login_required(login_url='/accounts/login/')
 def profile_info(request):
@@ -44,7 +44,7 @@ def profile_info(request):
         profile = Profile.objects.filter(user=current_user).first()
         posts = request.user.image_set.all()
 
-        return render(request, 'istagram/profile.html', {"images": posts, "profile": profile})
+        return render(request, 'instagram/profile.html', {"images": posts, "profile": profile})
 
 
 @login_required(login_url='/accounts/login/')
@@ -59,7 +59,7 @@ def profile_update(request):
                 return redirect('profile')
          else:
                 form = ProfileForm()
-         return render(request,'istagram/profile_update.html',{"form":form})
+         return render(request,'instagram/profile_update.html',{"form":form})
 
 
 @login_required(login_url='/accounts/login/')
@@ -81,7 +81,7 @@ def comment(request,image_id):
                 return redirect('index')
         else:
                 form = CommentForm()
-        return render(request, 'istagram/comment.html',locals())
+        return render(request, 'instagram/comment.html',locals())
 
 
 @login_required(login_url='/accounts/login/')
@@ -94,7 +94,7 @@ def search_results(request):
         return render(request, 'istagram/search.html', {'message':message, 'results':searched_users, 'profile_pic':profile_pic})
     else:
         message = "You haven't searched for any term"
-        return render(request, 'istagram/search.html', {'message':message})
+        return render(request, 'instagram/search.html', {'message':message})
 
 
 def follow(request, user_id):
@@ -123,4 +123,4 @@ def like_images(request, id):
                 image.like_add = image.votes.count()
                 image.save()
 
-        return redirect('index')                                                         
+        return redirect('index')
