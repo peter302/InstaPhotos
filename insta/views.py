@@ -10,3 +10,4 @@ from .models import Image, Profile,Comments,Likes
 from vote.managers import VotableManager
 
 # Create your views here.
+votes=VotableManager()
