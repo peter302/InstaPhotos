@@ -11,3 +11,13 @@ from vote.managers import VotableManager
 
 # Create your views here.
 votes=VotableManager()
+
+@login_required(login_url='/accounts/login/')
+def index(request):
+    current_user = request.user
+    posts = Image.get_all_images()
+    comments = Comments.objects.all()
+    profile = Profile.get_all_profiles()
+
+
+    return render(request, 'istagram/index.html', locals())
