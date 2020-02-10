@@ -44,4 +44,22 @@ def profile_info(request):
         profile = Profile.objects.filter(user=current_user).first()
         posts = request.user.image_set.all()
 
-        return render(request, 'istagram/profile.html', {"images": posts, "profile": profile})                    
+        return render(request, 'istagram/profile.html', {"images": posts, "profile": profile})
+
+
+@login_required(login_url='/accounts/login/')
+def profile_update(request):
+         current_user = request.user
+         if request.method == 'POST':
+                form = ProfileForm(request.POST, request.FILES)
+                if form.is_valid():
+                        add=form.save(commit=False)
+                        add.user = current_user
+                        add.save()
+                return redirect('profile')
+         else:
+                form = ProfileForm()
+         return render(request,'istagram/profile_update.html',{"form":form})
+
+
+                                    
