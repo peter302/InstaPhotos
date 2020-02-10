@@ -47,6 +47,19 @@ class Image(VoteModel,models.Model):
 
 
 
+class Likes(models.Model):
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def save_likes(self):
+        self.save()
+
+    def delete_like(self):
+        self.delete()
+
+    def count_likes(self):
+        likes = self.likes.count()
+        return likes
 
 class Comments(models.Model):
     comment = models.CharField(max_length = 50, blank=True)
@@ -72,4 +85,4 @@ class Comments(models.Model):
 
 
     def __str__(self):
-        return self.comment    
+        return self.comment
