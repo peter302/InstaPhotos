@@ -101,4 +101,11 @@ def follow(request, user_id):
     other_user = User.objects.get(id = user_id)
     follow = Follow.objects.add_follower(request.user, other_user)
 
-    return redirect('index')                                                    
+    return redirect('index')
+
+
+def unfollow(request, user_id):
+    other_user = User.objects.get(id = user_id)
+    follow = Follow.objects.remove_follower(request.user, other_user)
+
+    return redirect('index')                                                        
