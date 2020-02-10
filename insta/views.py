@@ -81,4 +81,17 @@ def comment(request,image_id):
                 return redirect('index')
         else:
                 form = CommentForm()
-        return render(request, 'istagram/comment.html',locals())                                    
+        return render(request, 'istagram/comment.html',locals())
+
+
+@login_required(login_url='/accounts/login/')
+def search_results(request):
+    if 'username' in request.GET and request.GET["username"]:
+        search_term = request.GET.get("username")
+        searched_users = User.objects.filter(username__icontains = search_term)
+        message = f"{search_term}"
+        profile_pic = User.objects.all()
+        return render(request, 'istagram/search.html', {'message':message, 'results':searched_users, 'profile_pic':profile_pic})
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'istagram/search.html', {'message':message})                                            
