@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'insta',
-    'bootstrap4',
+    'bootstrap3',
     'tinymce',
-    'vote'
+    'vote',
 ]
 
 MIDDLEWARE = [

@@ -2,6 +2,10 @@
 from __future__ import unicode_literals
 
 from django.db import models
+import datetime as dt
+from django.contrib.auth.models import User
+from tinymce.models import HTMLField
+from vote.models import VoteModel
 
 # Create your models here.
 class Profile(models.Model):
@@ -10,7 +14,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
 
-        def __str__(self):
+    def __str__(self):
         return self.bio
 
     def save_profile(self):

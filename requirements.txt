@@ -3,6 +3,7 @@ beautifulsoup4==4.8.2
 certifi==2019.11.28
 chardet==3.0.4
 Django==1.11
+django-bootstrap3==12.0.3
 django-bootstrap4==1.1.1
 django-tinymce==2.8.0
 greencache==1.0.0
@@ -17,5 +18,4 @@ requests==2.22.0
 six==1.14.0
 soupsieve==1.9.5
 urllib3==1.25.8
-vote==1.0.2
 zope.interface==4.7.1
