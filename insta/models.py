@@ -44,3 +44,32 @@ class Image(VoteModel,models.Model):
     date_uploaded = models.DateTimeField(auto_now_add=True)
     profile = models.ForeignKey(User, on_delete=models.CASCADE)
     like_add = models.PositiveIntegerField(default=0)
+
+
+
+
+class Comments(models.Model):
+    comment = models.CharField(max_length = 50, blank=True)
+    posted = models.DateTimeField(auto_now_add=True)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def save_comment(self):
+        self.save()
+
+    def delete_comment(self):
+        self.delete()
+
+    # @classmethod
+    # def get_comments_by_images(self):
+    #     comments = Image.objects.filter(image_id = id )
+    #     return comments
+
+    @classmethod
+    def get_comments(cls,id):
+        comments = cls.objects.filter(image__id=id)
+        return comments
+
+
+    def __str__(self):
+        return self.comment    
