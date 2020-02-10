@@ -94,4 +94,11 @@ def search_results(request):
         return render(request, 'istagram/search.html', {'message':message, 'results':searched_users, 'profile_pic':profile_pic})
     else:
         message = "You haven't searched for any term"
-        return render(request, 'istagram/search.html', {'message':message})                                            
+        return render(request, 'istagram/search.html', {'message':message})
+
+
+def follow(request, user_id):
+    other_user = User.objects.get(id = user_id)
+    follow = Follow.objects.add_follower(request.user, other_user)
+
+    return redirect('index')                                                    
